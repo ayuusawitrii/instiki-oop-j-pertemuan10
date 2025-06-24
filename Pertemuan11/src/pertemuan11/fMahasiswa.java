@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -323,19 +324,50 @@ public class fMahasiswa extends javax.swing.JFrame {
     }//GEN-LAST:event_TMMouseClicked
 
     private void cTUTUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cTUTUPActionPerformed
-        
+         if(cTUTUP.getText().equals("Tutup")){
+             
+         
+        int jwb = JOptionPane.showOptionDialog(this, 
+                   "Yakin akan menutup aplikasi?", 
+                   "Konfirmasi Hapus Data", 
+                   JOptionPane.YES_NO_OPTION, 
+                   JOptionPane.ERROR_MESSAGE, 
+                   null, null, null);
+        if(jwb ==JOptionPane.YES_OPTION){
+            
+        }
         System.exit(0);
+      }else{
+             cTUTUP.setText("Tutup");
+             cBARU.setText("Baru");
+             cUBAH.setText("Ubah");
+             fieldIsian(false);
+         }
     }//GEN-LAST:event_cTUTUPActionPerformed
 
     private void cHAPUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cHAPUSActionPerformed
-        String nim = txNIM.getText();
-        
+        if(cHAPUS.getText().equals("Hapus")){
+           String nim = txNIM.getText();
+           int jwb = JOptionPane.showOptionDialog(this, 
+                   "Yakin akan menghapus data dengan NIM" + nim, 
+                   "Konfirmasi Hapus Data", 
+                   JOptionPane.YES_NO_OPTION, 
+                   JOptionPane.ERROR_MESSAGE, 
+                   null, null, null);
+        if(jwb ==JOptionPane.YES_OPTION){
         try {
             destroydta(nim);
             ListDT();
         } catch (SQLException ex) {
             Logger.getLogger(fMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cleartextField();
+        fieldIsian(false);
+        cBARU.setEnabled(true);
+        cUBAH.setEnabled(false);
+        cHAPUS.setEnabled(false);
+        }
+      }
     }//GEN-LAST:event_cHAPUSActionPerformed
 
     private void cBARUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBARUActionPerformed
@@ -349,6 +381,7 @@ public class fMahasiswa extends javax.swing.JFrame {
         }else{
             cBARU.setText("Baru");
             cTUTUP.setText("Tutup");
+        }
         try {
             storedta();
             ListDT();
@@ -357,7 +390,6 @@ public class fMahasiswa extends javax.swing.JFrame {
         }
         cleartextField();
         fieldIsian(false);
-        }
     }//GEN-LAST:event_cBARUActionPerformed
 
     private void cUBAHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUBAHActionPerformed
